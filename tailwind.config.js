@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-      'primary': '#1a73e8',
+      'primary': '#7cb305',
       'secondary': '#4285f4',
         // You can also use objects for shade variations
         'brand': {
