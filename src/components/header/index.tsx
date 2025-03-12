@@ -3,47 +3,56 @@ import { LuLibraryBig, LuUser, LuMenu } from "react-icons/lu";
 import { HeaderLinkItem } from "../header-link-item";
 import { Avatar, Drawer } from "antd";
 import colors from "tailwindcss/colors";
-import type { DrawerProps, MenuProps } from "antd";
+import type { MenuProps } from "antd";
 import { Dropdown } from "antd";
-
-const headerItems = [
-  {
-    title: "Past",
-    icon: <LuLibraryBig size={20} />,
-  },
-  {
-    title: "Daily",
-    icon: <LuLibraryBig size={20} />,
-  },
-  {
-    title: "Weekly",
-    icon: <LuLibraryBig size={20} />,
-  },
-  {
-    title: "Monthly",
-    icon: <LuLibraryBig size={20} />,
-  },
-];
-
-const menuItems: MenuProps["items"] = [
-  {
-    label: "Profile",
-    key: "0",
-  },
-  {
-    label: "Submit Quest",
-    key: "1",
-  },
-  {
-    label: "Logout",
-    key: "2",
-  },
-];
+import { useNavigate, NavLink } from "react-router";
 
 export const Header = () => {
   const [active, setActive] = useState<number>(0);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
+
+  let navigate = useNavigate();
+
+  const headerItems = [
+    {
+      title: "Past",
+      route: "/",
+      icon: <LuLibraryBig size={20} />,
+    },
+    {
+      title: "Daily",
+      route: "/",
+      icon: <LuLibraryBig size={20} />,
+    },
+    {
+      title: "Weekly",
+      route: "/",
+      icon: <LuLibraryBig size={20} />,
+    },
+    {
+      title: "Monthly",
+      route: "/",
+      icon: <LuLibraryBig size={20} />,
+    },
+  ];
+
+  const menuItems: MenuProps["items"] = [
+    {
+      label: "Profile",
+      key: "0",
+      onClick: () => navigate("/profile"),
+    },
+    {
+      label: "Submit Quest",
+      key: "1",
+    },
+    {
+      label: "Logout",
+      key: "2",
+      onClick: () => navigate("/login"),
+    },
+  ];
 
   const showDrawer = () => {
     setOpen(true);
@@ -58,12 +67,14 @@ export const Header = () => {
       <div className="flex flex-row h-full w-full justify-between max-w-[1024px]">
         <div className="hidden sm:flex flex-row items-center">
           {headerItems.map((item, index) => (
-            <HeaderLinkItem
-              title={item.title}
-              icon={item.icon}
-              active={active === index}
-              onClick={() => setActive(index)}
-            />
+            <NavLink to={item.route}>
+              <HeaderLinkItem
+                title={item.title}
+                icon={item.icon}
+                active={active === index}
+                onClick={() => setActive(index)}
+              />
+            </NavLink>
           ))}
         </div>
 

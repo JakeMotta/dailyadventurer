@@ -1,9 +1,7 @@
 .header-link-item {
-
-
-    &:hover {
-        .header-link-bar {
-            opacity: .5;
-        }
+  &:hover {
+    .header-link-bar {
+      opacity: 0.5;
     }
+  }
 }
