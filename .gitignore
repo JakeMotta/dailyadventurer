@@ -52,8 +52,6 @@ Thumbs.db
 # env
 git-crypt-lighthouse-web-key
 
-.firebase
-
 cypress/downloads
 cypress/logs
 cypress/videos
