@@ -33,7 +33,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettier": "prettier --write \"**/*.+(tsx|ts|jsx|js|json|css|scss|md)\" --fix",
-    "reset": "rm -rf node_modules yarn.lock && yarn"
+    "reset": "rm -rf node_modules yarn.lock && yarn",
+    "pull-env": "vercel env pull .env"
   },
   "browserslist": {
     "production": [
