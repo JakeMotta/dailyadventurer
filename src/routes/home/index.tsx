@@ -1,11 +1,14 @@
 import React from "react";
 import { Button } from "antd";
 import { Header } from "../../components/header";
+import { useNavigate } from "react-router";
 import "./index.scss";
 
 let date = new Date();
 
 export default function Home() {
+  let navigate = useNavigate();
+
   return (
     <>
       <Header />
@@ -23,7 +26,7 @@ export default function Home() {
         <div className="quest-wrapper flex-col mt-8 w-[50%] rounded-t-md bg-gray-800 text-white p-4 justify-self-center">
           <div className="text-md font-bold">Today's Quest</div>
           <div className="text-xs">
-            {date.getMonth()} / {date.getDay()} / {date.getFullYear()}
+            {date.getMonth() + 1} / {date.getDate()} / {date.getFullYear()}
           </div>
           <div className="flex w-full h-[2px] bg-primary mt-4 mb-2" />
           <div className="text-md">Cook dinner for someone</div>
@@ -34,6 +37,7 @@ export default function Home() {
           size="large"
           style={{ borderRadius: "0px 0px 8px 8px" }}
           className="w-[50%]"
+          onClick={() => navigate("/login")}
         >
           Sign In to Complete Quest
         </Button>

@@ -6,11 +6,15 @@ import colors from "tailwindcss/colors";
 import type { MenuProps } from "antd";
 import { Dropdown } from "antd";
 import { useNavigate, NavLink } from "react-router";
+import { useAuthStore } from "../../store/auth";
 
 export const Header = () => {
   const [active, setActive] = useState<number>(0);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
+
+  const user = useAuthStore((store) => store.user);
+  const logout = useAuthStore((store) => store.logout);
 
   let navigate = useNavigate();
 
@@ -48,9 +52,14 @@ export const Header = () => {
       key: "1",
     },
     {
-      label: "Logout",
+      label: "Dev Store",
       key: "2",
-      onClick: () => navigate("/login"),
+      onClick: () => console.log("user: ", user),
+    },
+    {
+      label: "Logout",
+      key: "3",
+      onClick: () => logout(),
     },
   ];
 
@@ -67,7 +76,7 @@ export const Header = () => {
       <div className="flex flex-row h-full w-full justify-between max-w-[1024px]">
         <div className="hidden sm:flex flex-row items-center">
           {headerItems.map((item, index) => (
-            <NavLink to={item.route}>
+            <NavLink to={item.route} key={item.title}>
               <HeaderLinkItem
                 title={item.title}
                 icon={item.icon}
@@ -111,8 +120,8 @@ export const Header = () => {
           open={open}
           key={"left"}
         >
-          {headerItems.map((item, index) => (
-            <div className="flex flex-row items-center">
+          {headerItems.map((item) => (
+            <div className="flex flex-row items-center" key={item.title}>
               {item.icon}
               {item.title}
             </div>
