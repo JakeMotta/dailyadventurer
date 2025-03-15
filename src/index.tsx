@@ -1,18 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Home from "./routes/home";
 import reportWebVitals from "./reportWebVitals";
 import { ConfigProvider } from "antd";
-import { BrowserRouter, Route, Routes } from "react-router";
-import Profile from "./routes/profile";
-import "./global.css";
-import "./index.scss";
-import Login from "./routes/auth/login";
-// import colors from 'tailwindcss/colors';
+import App from "./App";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement,
+  document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <ConfigProvider
@@ -26,17 +21,9 @@ root.render(
         token: { colorPrimary: "#7cb305" },
       }}
     >
-      <div className="flex flex-col w-screen h-screen justify-center items-center">
-        <BrowserRouter>
-          <Routes>
-            <Route index path="/" element={<Home />} />
-            <Route index path="/profile" element={<Profile />} />
-            <Route index path="/login" element={<Login />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <App />
     </ConfigProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

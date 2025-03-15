@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { LuLibraryBig, LuUser, LuMenu } from "react-icons/lu";
-import { HeaderLinkItem } from "../header-link-item";
-import { Avatar, Drawer } from "antd";
-import colors from "tailwindcss/colors";
-import type { MenuProps } from "antd";
-import { Dropdown } from "antd";
-import { useNavigate, NavLink } from "react-router";
-import { useAuthStore } from "../../store/auth";
+import React, { useState } from 'react';
+import { LuLibraryBig, LuUser, LuMenu } from 'react-icons/lu';
+import { HeaderLinkItem } from '../header-link-item';
+import { Avatar, Drawer } from 'antd';
+import colors from 'tailwindcss/colors';
+import type { MenuProps } from 'antd';
+import { Dropdown } from 'antd';
+import { useNavigate, NavLink } from 'react-router';
+import { useAuthStore } from '../../store/auth';
+import { auth } from '../../services';
+import { getAuth, signOut } from 'firebase/auth';
 
 export const Header = () => {
   const [active, setActive] = useState<number>(0);
@@ -20,46 +22,72 @@ export const Header = () => {
 
   const headerItems = [
     {
-      title: "Past",
-      route: "/",
+      title: 'Past',
+      route: '/',
       icon: <LuLibraryBig size={20} />,
     },
     {
-      title: "Daily",
-      route: "/",
+      title: 'Daily',
+      route: '/',
       icon: <LuLibraryBig size={20} />,
     },
     {
-      title: "Weekly",
-      route: "/",
+      title: 'Weekly',
+      route: '/',
       icon: <LuLibraryBig size={20} />,
     },
     {
-      title: "Monthly",
-      route: "/",
+      title: 'Monthly',
+      route: '/',
       icon: <LuLibraryBig size={20} />,
     },
   ];
 
-  const menuItems: MenuProps["items"] = [
+  const authenticatedMenuItems: MenuProps['items'] = [
     {
-      label: "Profile",
-      key: "0",
-      onClick: () => navigate("/profile"),
+      label: 'Profile',
+      key: 'profile',
+      onClick: () => navigate('/profile'),
     },
     {
-      label: "Submit Quest",
-      key: "1",
+      label: 'Submit Quest',
+      key: 'submit_quest',
     },
     {
-      label: "Dev Store",
-      key: "2",
-      onClick: () => console.log("user: ", user),
+      label: 'Logout',
+      key: 'logout',
+      onClick: () => {
+        const handler = async () => {
+          return await signOut(getAuth());
+        };
+
+        handler().finally(() => {
+          logout();
+          navigate('/');
+        });
+      },
     },
     {
-      label: "Logout",
-      key: "3",
-      onClick: () => logout(),
+      label: 'Dev Store',
+      key: 'dev',
+      onClick: () => console.log('user: ', user),
+    },
+  ];
+
+  const unauthenticatedMenuItems: MenuProps['items'] = [
+    {
+      label: 'Login',
+      key: 'login',
+      onClick: () => navigate('/login'),
+    },
+    {
+      label: 'Submit Quest',
+      key: 'submit_quest',
+    },
+    {
+      label: 'Dev Store',
+      key: 'dev',
+      onClick: () => console.log('user: ', user),
     },
   ];
 
@@ -77,49 +105,42 @@ export const Header = () => {
         <div className="hidden sm:flex flex-row items-center">
           {headerItems.map((item, index) => (
             <NavLink to={item.route} key={item.title}>
-              <HeaderLinkItem
-                title={item.title}
-                icon={item.icon}
-                active={active === index}
-                onClick={() => setActive(index)}
-              />
+              <HeaderLinkItem title={item.title} icon={item.icon} active={active === index} onClick={() => setActive(index)} />
             </NavLink>
           ))}
         </div>
 
         <div className="flex sm:hidden flex-row items-center">
           <Avatar
-            size={"large"}
+            size={'large'}
+            src={user?.profile_picture_url || null}
             icon={<LuMenu size={20} color={colors.white} />}
             className="cursor-pointer hover:bg-gray-600 duration-100"
-            style={{ backgroundColor: menuOpen ? colors.gray[600] : "" }}
+            style={{ backgroundColor: menuOpen ? colors.gray[600] : '' }}
             onClick={showDrawer}
           />
         </div>
 
         <div className="flex h-full items-center pr-4">
           <Dropdown
-            menu={{ items: menuItems }}
+            menu={{
+              items: auth?.currentUser ? authenticatedMenuItems : unauthenticatedMenuItems,
+            }}
             onOpenChange={(isOpen) => setMenuOpen(isOpen)}
-            trigger={["click"]}
+            trigger={['click']}
           >
             <Avatar
-              size={"large"}
+              size={'large'}
+              src={user?.profile_picture_url || null}
               icon={<LuUser size={20} color={colors.white} />}
               className="cursor-pointer hover:bg-gray-600 duration-100"
-              style={{ backgroundColor: menuOpen ? colors.gray[600] : "" }}
+              style={{ backgroundColor: menuOpen ? colors.gray[600] : '' }}
               onClick={(e) => e?.preventDefault()}
             />
           </Dropdown>
         </div>
 
-        <Drawer
-          placement={"left"}
-          closable={false}
-          onClose={onClose}
-          open={open}
-          key={"left"}
-        >
+        <Drawer placement={'left'} closable={false} onClose={onClose} open={open} key={'left'}>
           {headerItems.map((item) => (
             <div className="flex flex-row items-center" key={item.title}>
               {item.icon}

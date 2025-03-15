@@ -1,11 +1,14 @@
-import React from "react";
-import { Header } from "../../../components/header";
-import { Button } from "antd";
-import { getAccessToken, googleSignIn } from "../../../api";
-import { useAuthStore, UserProps } from "../../../store/auth";
-import "./index.scss";
+import React from 'react';
+import { Header } from '../../../components/header';
+import { Button } from 'antd';
+import { getAccessToken, googleSignIn } from '../../../api';
+import { useAuthStore } from '../../../store/auth';
+import { parseGoogleUserAfterSignIn } from '../../../utils';
+import { useNavigate } from 'react-router';
+import './index.scss';
 
 export default function Login() {
+  const navigate = useNavigate();
   const user = useAuthStore((store) => store.user);
   const upsertUser = useAuthStore((store) => store.upsertUser);
 
@@ -22,20 +25,8 @@ export default function Login() {
             className="w-[50%]"
             onClick={() => {
               googleSignIn().then((incomingData) => {
-                console.log("res: ", incomingData);
-                const { user } = incomingData;
-
-                let userData: UserProps = {
-                  email: user?.email,
-                  createdAt: user?.metadata?.creationTime || null,
-                  username: user?.displayName,
-                  profile_picture_url: user?.photoURL,
-                  // @ts-ignore
-                  accessToken: user?.accessToken,
-                  emailVerified: user?.emailVerified,
-                };
-
-                upsertUser(userData);
+                upsertUser(parseGoogleUserAfterSignIn(incomingData.user));
+                navigate('/');
               });
             }}
           >
@@ -49,7 +40,7 @@ export default function Login() {
             onClick={() => {
               const handler = async () => {
                 let res = await getAccessToken();
-                console.log("acesstoken: ", res);
+                console.log('acesstoken: ', res);
               };
 
               handler();
