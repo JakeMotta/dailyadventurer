@@ -1,17 +1,14 @@
 import React from "react";
 import "./index.scss";
 
-export const HeaderLinkItem = ({
-  title,
-  icon,
-  active,
-  onClick,
-}: {
+interface HeaderLinkItemProps {
   title: string;
   icon: React.ReactNode;
   active: boolean;
   onClick: () => void;
-}) => {
+}
+
+export const HeaderLinkItem = ({ title, icon, active, onClick }: HeaderLinkItemProps) => {
   return (
     <div
       className="header-link-item flex flex-col justify-center h-full px-4 cursor-pointer"

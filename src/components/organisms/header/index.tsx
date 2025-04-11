@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { LuLibraryBig, LuUser, LuMenu } from 'react-icons/lu';
-import { HeaderLinkItem } from '../header-link-item';
-import { Avatar, Drawer } from 'antd';
-import colors from 'tailwindcss/colors';
+import { HeaderLinkItem } from '../../molecules/header-link-item';
+import { Avatar, Drawer, Dropdown } from '../../atoms';
 import type { MenuProps } from 'antd';
-import { Dropdown } from 'antd';
 import { useNavigate, NavLink } from 'react-router';
 import { useAuthStore } from '../../../store/auth';
 import { auth } from '../../../services';
 import { getAuth, signOut } from 'firebase/auth';
+import colors from 'tailwindcss/colors';
 
 export const Header = () => {
   const [active, setActive] = useState<number>(0);
