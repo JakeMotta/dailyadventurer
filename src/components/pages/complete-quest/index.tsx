@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
-import { Header } from '../../components/header';
+import { Header } from '../../components/organisms/header';
 import { useNavigate } from 'react-router';
 import { Input } from 'antd';
 import './index.scss';

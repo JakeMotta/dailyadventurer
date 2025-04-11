@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from '../../../components/header';
+import { Header } from '../../../components/organisms/header';
 import { Button } from 'antd';
 import { getAccessToken, googleSignIn } from '../../../api';
 import { useAuthStore } from '../../../store/auth';

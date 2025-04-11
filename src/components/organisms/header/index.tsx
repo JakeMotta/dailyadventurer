@@ -6,8 +6,8 @@ import colors from 'tailwindcss/colors';
 import type { MenuProps } from 'antd';
 import { Dropdown } from 'antd';
 import { useNavigate, NavLink } from 'react-router';
-import { useAuthStore } from '../../store/auth';
-import { auth } from '../../services';
+import { useAuthStore } from '../../../store/auth';
+import { auth } from '../../../services';
 import { getAuth, signOut } from 'firebase/auth';
 
 export const Header = () => {
