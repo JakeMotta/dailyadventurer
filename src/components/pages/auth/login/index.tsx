@@ -1,13 +1,13 @@
 import React from 'react';
-import { Header } from '../../../components/organisms/header';
-import { Button } from 'antd';
-import { getAccessToken, googleSignIn } from '../../../api';
-import { useAuthStore } from '../../../store/auth';
-import { parseGoogleUserAfterSignIn } from '../../../utils';
+import { Button } from '../../../atoms';
+import { Header } from '../../../organisms/header';
+import { getAccessToken, googleSignIn } from '../../../../api';
+import { useAuthStore } from '../../../../store/auth';
+import { parseGoogleUserAfterSignIn } from '../../../../utils';
 import { useNavigate } from 'react-router';
 import './index.scss';
 
-export default function Login() {
+export const Login = () => {
   const navigate = useNavigate();
   const user = useAuthStore((store) => store.user);
   const upsertUser = useAuthStore((store) => store.upsertUser);

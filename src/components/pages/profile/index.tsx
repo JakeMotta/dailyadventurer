@@ -1,7 +1,7 @@
 import React from 'react';
-import { Header } from '../../components/organisms/header';
+import { Header } from '../../organisms/header';
 
-export default function Profile() {
+export const Profile = () => {
   return (
     <>
       <Header />

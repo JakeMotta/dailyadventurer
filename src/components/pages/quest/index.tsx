@@ -1,12 +1,12 @@
 import React from 'react';
-import { Button } from 'antd';
-import { Header } from '../../components/organisms/header';
+import { Button } from '../../atoms';
+import { Header } from '../../organisms/header';
 import { useNavigate } from 'react-router';
-import { auth } from '../../services';
+import { auth } from '../../../services';
 
 let date = new Date();
 
-export default function Quest() {
+export const Quest = () => {
   let navigate = useNavigate();
 
   return (

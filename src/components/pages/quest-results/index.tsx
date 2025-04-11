@@ -1,13 +1,9 @@
 import React from 'react';
-import { Button } from 'antd';
-import { Header } from '../../components/organisms/header';
+import { Button, TextArea } from '../../atoms';
+import { Header } from '../../organisms/header';
 import { useNavigate } from 'react-router';
-import { auth } from '../../services';
-import { Input } from 'antd';
 
-const { TextArea } = Input;
-
-export default function CompleteQuest() {
+export const QuestResults = () => {
   let navigate = useNavigate();
 
   return (

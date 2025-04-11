@@ -1,8 +1,8 @@
 import React from "react";
-import { Header } from "../../../components/organisms/header";
+import { Header } from "../../../organisms/header";
 import "./index.scss";
 
-export default function Reset() {
+export const Reset = () => {
   return (
     <>
       <Header />

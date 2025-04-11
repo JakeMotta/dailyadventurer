@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { Button } from 'antd';
-import { Header } from '../../components/organisms/header';
+import { Button, TextArea } from '../../atoms';
+import { Header } from '../../organisms/header';
 import { useNavigate } from 'react-router';
-import { Input } from 'antd';
 import './index.scss';
 
-const { TextArea } = Input;
-
-export default function QuestResults() {
+export const CompleteQuest = () => {
   let navigate = useNavigate();
   const [questCompletionText, setTextCompletionText] = useState('');
 
