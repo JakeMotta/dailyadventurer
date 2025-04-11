@@ -37,7 +37,9 @@
     "prettier": "prettier --write \"**/*.+(tsx|ts|jsx|js|json|css|scss|md)\" --fix",
     "reset": "rm -rf node_modules yarn.lock && yarn",
     "pull-env": "vercel env pull .env",
-    "build-dictionary": "style-dictionary build --config ./style-dictionary/config.json"
+    "build-dictionary": "style-dictionary build --config ./style-dictionary/config.json",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "browserslist": {
     "production": [
@@ -53,8 +55,19 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/addon-interactions": "^8.6.12",
+    "@storybook/addon-onboarding": "^8.6.12",
+    "@storybook/blocks": "^8.6.12",
+    "@storybook/preset-create-react-app": "^8.6.12",
+    "@storybook/react": "^8.6.12",
+    "@storybook/react-webpack5": "^8.6.12",
+    "@storybook/test": "^8.6.12",
     "prettier": "^3.4.2",
+    "prop-types": "^15.8.1",
+    "storybook": "^8.6.12",
     "style-dictionary": "^4.3.3",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "webpack": "^5.99.5"
   }
 }

@@ -67,3 +67,5 @@ tsconfig.tsbuildinfo
 .million/store.json
 .eslintcache
 .vercel
+
+*storybook.log
